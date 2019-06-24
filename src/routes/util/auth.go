@@ -3,7 +3,6 @@ package util
 import (
 	"context"
 	"encoding/json"
-	"io/ioutil"
 	"net/http"
 	"strings"
 
@@ -45,14 +44,6 @@ func IsAuthenticated(handler http.Handler) http.Handler {
 			}
 		}
 	})
-}
-
-func extractRequestFields(r *http.Request, result *map[string]string) {
-	rawJSONAuth, err := ioutil.ReadAll(r.Body)
-	if err != nil {
-		panic(err)
-	}
-	json.Unmarshal(rawJSONAuth, &result)
 }
 
 func deleteSession(database *mongo.Database, session data.Session) {
