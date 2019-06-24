@@ -1,0 +1,22 @@
+POST http://localhost:8080/register
+
+{
+    "username" : "<a username>",
+    "password" : "<a password>",
+    "email" : "<a email>"
+}
+
+POST http://localhost:8080/login
+
+{
+    "username" : "<a username>",
+    "password" : "<a password>"
+}
+
+POST http://localhost:8080/claim
+Session: "<A session UUID>"
+
+{
+    "message" : "<a message>"
+}
+
