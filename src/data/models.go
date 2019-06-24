@@ -17,12 +17,12 @@ type Session struct {
 	Created   int64  `json:"creation_time" bson:"creation_time"`
 }
 
-//Error - Format for serving errors in the API
+//Error - Format for serving errors to the caller
 type Error struct {
 	Message string `json:"error"`
 }
 
-//Success - Format for serving success notifications in the API
+//Success - Format for serving success notifications to the caller
 type Success struct {
 	Message string `json:"success"`
 }
