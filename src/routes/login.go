@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
+	"strings"
 	"time"
 
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -18,7 +19,7 @@ import (
 
 //LoginRequest - structure which stores data coming from a login request to the server
 type LoginRequest struct {
-	Username string `json:"username"`
+	Email    string `json:"email"`
 	Password string `json:"password"`
 }
 
@@ -44,7 +45,7 @@ func authenticate(loginReq LoginRequest) (session data.Session, authenticated bo
 	db := data.DatabaseClient.Database(data.DatabaseName)
 	users := db.Collection("users")
 	//check if a document exists with username + password combo
-	count, err := users.CountDocuments(context.TODO(), bson.D{{Key: "username", Value: loginReq.Username},
+	count, err := users.CountDocuments(context.TODO(), bson.D{{Key: "email", Value: strings.ToLower(loginReq.Email)},
 		{Key: "password", Value: loginReq.Password}})
 	if err != nil {
 		panic(err)
@@ -63,12 +64,12 @@ func authenticate(loginReq LoginRequest) (session data.Session, authenticated bo
 		}
 		upsert := true
 		_, err := sessions.UpdateOne(context.TODO(),
-			bson.D{{Key: "username", Value: loginReq.Username}},
+			bson.D{{Key: "username", Value: strings.ToLower(loginReq.Email)}},
 			update, &options.UpdateOptions{Upsert: &upsert})
 		if err != nil {
 			panic(err)
 		}
-		session = data.Session{Username: loginReq.Username, SessionID: sessionID, Created: time.Now().Unix()}
+		session = data.Session{Username: loginReq.Email, SessionID: sessionID, Created: time.Now().Unix()}
 	} else {
 		authenticated = false
 	}

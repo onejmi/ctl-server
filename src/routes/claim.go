@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
+	"strings"
 	"time"
 
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -19,8 +20,8 @@ var database *mongo.Database
 //Claim - Request to claim light bulb
 func Claim(w http.ResponseWriter, r *http.Request) {
 	database = data.DatabaseClient.Database(data.DatabaseName)
-	result := database.Collection("users").FindOne(context.TODO(), bson.D{{Key: "username",
-		Value: r.Header.Get("username")}})
+	result := database.Collection("users").FindOne(context.TODO(), bson.D{{Key: "email",
+		Value: strings.ToLower(r.Header.Get("email"))}})
 	var user data.User
 	result.Decode(&user)
 
@@ -30,7 +31,7 @@ func Claim(w http.ResponseWriter, r *http.Request) {
 
 	setOwner(&user, body["message"])
 
-	filter := bson.D{{Key: "username", Value: r.Header.Get("username")}}
+	filter := bson.D{{Key: "email", Value: strings.ToLower(r.Header.Get("email"))}}
 	update := bson.D{{Key: "$set", Value: bson.D{{Key: "time", Value: user.Time}}}}
 	database.Collection("users").UpdateOne(context.TODO(), filter, update)
 

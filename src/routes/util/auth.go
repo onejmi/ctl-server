@@ -38,7 +38,7 @@ func IsAuthenticated(handler http.Handler) http.Handler {
 					deleteSession(database, session)
 					invalidSession(w)
 				} else {
-					r.Header.Set("username", session.Username)
+					r.Header.Set("email", session.Username)
 					handler.ServeHTTP(w, r)
 				}
 			}
