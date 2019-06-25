@@ -36,7 +36,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		}
 		w.Write(sessionJSON)
 	} else {
-		jsonError, _ := json.Marshal(data.Error{Message: "Invalid login details"})
+		jsonError, _ := json.Marshal(data.Error{Code: 17, Message: "Invalid login details"})
 		w.Write(jsonError)
 	}
 }

@@ -18,7 +18,12 @@ type Session struct {
 }
 
 //Error - Format for serving errors to the caller
+// 17 -> Invalid login details
+// 18 -> Not all user fields were filled for registration
+// 19 -> User already exists (when trying to register)
+// 20 -> Invalid Session
 type Error struct {
+	Code    int    `json:"code"`
 	Message string `json:"error"`
 }
 

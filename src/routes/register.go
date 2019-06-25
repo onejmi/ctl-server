@@ -22,10 +22,10 @@ func Register(w http.ResponseWriter, r *http.Request) {
 	var newUser data.User
 	json.Unmarshal(raw, &newUser)
 	if newUser.Username == "" || newUser.Password == "" || newUser.Email == "" {
-		jsonError, _ := json.Marshal(data.Error{Message: "Please specify all user fields."})
+		jsonError, _ := json.Marshal(data.Error{Code: 18, Message: "Please specify all user fields."})
 		w.Write(jsonError)
 	} else if exists(users, newUser.Username) {
-		jsonError, _ := json.Marshal(data.Error{Message: "That user already exists"})
+		jsonError, _ := json.Marshal(data.Error{Code: 19, Message: "That user already exists"})
 		w.Write(jsonError)
 	} else {
 		addUser(newUser)

@@ -55,6 +55,6 @@ func deleteSession(database *mongo.Database, session data.Session) {
 }
 
 func invalidSession(w http.ResponseWriter) {
-	jsonError, _ := json.Marshal(data.Error{Message: "Invalid Session."})
+	jsonError, _ := json.Marshal(data.Error{Code: 20, Message: "Invalid Session."})
 	w.Write(jsonError)
 }
