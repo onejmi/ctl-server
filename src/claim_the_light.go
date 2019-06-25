@@ -14,6 +14,8 @@ func main() {
 	setupDatabase()
 	configureRoutes()
 
+	data.SetupCronJobs()
+
 	fmt.Println("Starting server...")
 	http.ListenAndServe(":8080", nil)
 }
