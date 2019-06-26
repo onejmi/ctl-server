@@ -1,4 +1,4 @@
-## Claim The Light Server
+# CTL Server
 Backend for Claim The Light project.
 
 Written in Go.
