@@ -18,6 +18,8 @@ func JSONResponse(handler http.Handler) http.Handler {
 //OnlyMethod - Restricts access to endpoint to one HTTP method
 func OnlyMethod(method string, handler http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		//Avoid CORS issue when working locally:
+		w.Header().Set("Access-Control-Allow-Origin", "*")
 		if r.Method != method {
 			jsonError, _ := json.Marshal(data.Error{Message: "Method not supported."})
 			w.Write(jsonError)
