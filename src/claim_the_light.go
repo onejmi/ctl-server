@@ -25,6 +25,8 @@ func configureRoutes() {
 	http.Handle("/login", util.OnlyMethod("POST", util.JSONResponse(handler(routes.Login))))
 	http.Handle("/claim", util.OnlyMethod("POST",
 		util.JSONResponse(util.IsAuthenticated(handler(routes.Claim)))))
+	http.Handle("/profile",
+		util.OnlyMethod("GET", util.JSONResponse(util.IsAuthenticated(handler(routes.GetProfile)))))
 }
 
 func setupDatabase() {

@@ -9,7 +9,7 @@ POST http://localhost:8080/register
 POST http://localhost:8080/login
 
 {
-    "username" : "<a username>",
+    "email" : "<a email>",
     "password" : "<a password>"
 }
 
@@ -19,3 +19,6 @@ Session: "<A session UUID>"
 {
     "message" : "<a message>"
 }
+
+GET http://localhost/profile
+Session: "<a session UUID>"
