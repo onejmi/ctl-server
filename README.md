@@ -5,7 +5,7 @@ Written in Go.
 
 ### TODO
 * ~~Add profile route (GET) which will serve user objects to authenticated clients~~
-* Limit he amount of requests a certain session can send to the server (in a certain period of time)
+* Limit the amount of requests a certain session can send to the server in a certain period of time (rate limiting)
 * Track user IPs
 * ~~Refactor error "code" to "status"~~
 
