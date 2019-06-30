@@ -17,6 +17,13 @@ type Session struct {
 	Created   int64  `json:"creation_time" bson:"creation_time"`
 }
 
+//Claim - Data to submit and/or view a claim
+type Claim struct {
+	Username string `json:"username" bson:"username"`
+	BulbName string `json:"name" bson:"name"`
+	Message  string `json:"message" bson:"message"`
+}
+
 //Error - Format for serving errors to the caller
 // 17 -> Invalid login details
 // 18 -> Not all user fields were filled for registration

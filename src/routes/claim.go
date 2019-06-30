@@ -52,3 +52,17 @@ func setOwner(user *data.User, message string) {
 	}
 	user.Time = time.Now().Unix()
 }
+
+//ViewClaim - Request to view who claims the 'main' bulb
+func ViewClaim(w http.ResponseWriter, r *http.Request) {
+	var claim data.Claim
+
+	data.
+		DatabaseClient.
+		Database(data.DatabaseName).
+		Collection("bulbs").
+		FindOne(context.TODO(), bson.D{}).Decode(&claim)
+
+	jsonResponse, _ := json.Marshal(claim)
+	w.Write(jsonResponse)
+}

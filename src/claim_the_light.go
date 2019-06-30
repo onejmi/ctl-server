@@ -27,6 +27,8 @@ func configureRoutes() {
 		util.JSONResponse(util.IsAuthenticated(handler(routes.Claim)))))
 	http.Handle("/profile",
 		util.OnlyMethod("GET", util.JSONResponse(util.IsAuthenticated(handler(routes.GetProfile)))))
+	http.Handle("/latest",
+		util.OnlyMethod("GET", util.JSONResponse(util.IsAuthenticated(handler(routes.ViewClaim)))))
 }
 
 func setupDatabase() {
