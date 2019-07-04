@@ -24,7 +24,7 @@ func Register(w http.ResponseWriter, r *http.Request) {
 	if newUser.Username == "" || newUser.Password == "" || newUser.Email == "" {
 		jsonError, _ := json.Marshal(data.Error{Code: 18, Message: "Please specify all user fields."})
 		w.Write(jsonError)
-	} else if exists(users, newUser.Username) {
+	} else if exists(users, newUser.Email) {
 		jsonError, _ := json.Marshal(data.Error{Code: 19, Message: "That user already exists"})
 		w.Write(jsonError)
 	} else {
@@ -42,8 +42,8 @@ func addUser(user data.User) {
 	fmt.Println("Inserted user: ", insertResponse.InsertedID)
 }
 
-func exists(users *mongo.Collection, username string) bool {
-	count, err := users.CountDocuments(context.TODO(), bson.D{{Key: "username", Value: username}})
+func exists(users *mongo.Collection, email string) bool {
+	count, err := users.CountDocuments(context.TODO(), bson.D{{Key: "email", Value: email}})
 	if err != nil {
 		log.Fatal(err)
 	}
