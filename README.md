@@ -10,5 +10,5 @@ Written in Go.
 * ~~Refactor error "code" to "status"~~
 
 ### How to run
-Use `go run claim_the_light.go` assuming Go is apart of the `$PATH` environment variable
+Use `go run claim_the_light.go` assuming Go is a part of the `$PATH` environment variable
 and the command is being executed in the **src/** directory.
